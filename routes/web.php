@@ -40,11 +40,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('akademik')->group(function () {
 
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-    Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'show'])
-        ->where('nim', '[0-9]+')
-        ->name('mahasiswa.show');
+    Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+    Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+    Route::get('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+    Route::get('/mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+    Route::put('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+    Route::delete('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
     Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
-    Route::get('/matakuliah/{kode}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
+    Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
+    Route::post('/matakuliah', [MatakuliahController::class, 'store'])->name('matakuliah.store');
+    Route::get('/matakuliah/{matakuliah}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
 });
 
+
+
+    Route::fallback(function () {
+        return 'Halaman yang Anda cari tidak ditemukan.';
+});
