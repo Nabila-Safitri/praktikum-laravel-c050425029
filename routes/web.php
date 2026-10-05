@@ -60,8 +60,8 @@ Route::get('/profil-view', function () {
         ->with('prodi', 'Sistem Informasi Kota Cerdas');
 });
 
-Route::get('/strukturdata', function () {
-    return view('akademik.sturkturdata');
+Route::get('/statistik', function () {
+    return view('akademik.statistik');
 });
 
     Route::fallback(function () {
