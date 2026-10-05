@@ -53,7 +53,16 @@ Route::prefix('akademik')->group(function () {
     Route::get('/matakuliah/{matakuliah}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
 });
 
+Route::get('/profil-view', function () {
+    return view('profil')
+        ->with('nama', 'Nabila Safitri')
+        ->with('nim', 'C050425029')
+        ->with('prodi', 'Sistem Informasi Kota Cerdas');
+});
 
+Route::get('/strukturdata', function () {
+    return view('akademik.sturkturdata');
+});
 
     Route::fallback(function () {
         return 'Halaman yang Anda cari tidak ditemukan.';
