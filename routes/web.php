@@ -36,23 +36,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('dashboard');
 });
 
-// Praktikum 2, 3, 6: route group akademik
+
 Route::prefix('akademik')->group(function () {
-    // route mahasiswa
+
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
     Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'show'])
-        ->where('nim', '[0-9]+')->name('mahasiswa.show');
+        ->where('nim', '[0-9]+')
+        ->name('mahasiswa.show');
 
-    // route matakuliah (milik dosen, hanya dipindah ke dalam group)
     Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
-    // ... create & store dari dosen tetap di sini ...
     Route::get('/matakuliah/{kode}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
-
-    // Matakuliah: hanya show (route model binding), index/create/store tetap milik dosen
-    Route::get('/matakuliah/{matakuliah}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
 });
 
-// Fallback (wajib paling bawah)
-Route::fallback(function () {
-    return 'Halaman yang Anda cari tidak ditemukan.';
-});
