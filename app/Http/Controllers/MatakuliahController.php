@@ -14,6 +14,7 @@ class MatakuliahController extends Controller
         // eager loading relasi 'dosen' agar tidak N+1 query
         $matakuliahs = Matakuliah::with('dosen')->get();
 
+        return 'Halaman daftar seluruh mata kuliah';
         return view('matakuliah.index', compact('matakuliahs'));
     }
 
@@ -42,5 +43,10 @@ class MatakuliahController extends Controller
 
         return redirect()->route('matakuliah.index')
             ->with('success', 'Mata kuliah berhasil ditambahkan.');
+    }
+
+   public function show(Matakuliah $matakuliah)
+    {
+    return "Mata kuliah: {$matakuliah->nama_mk} ({$matakuliah->sks} SKS)";
     }
 }
